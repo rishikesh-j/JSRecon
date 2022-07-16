@@ -21,7 +21,7 @@ echo -e "\n-----------------------FINISHED INSTALLING INTERLACE-----------------
 #INSTALL SECRETFINDER
 echo -e "\n-----------------------INSTALLING SECRETFINDER------------------------"
 cd ./tools
-git clone https://github.com/rishikesh-j/SecretFinder.git
+git clone https://github.com/m4ll0k/SecretFinder.git
 cd -
 pip3 install --user -r ./tools/SecretFinder/requirements.txt
 echo -e "\n-----------------------FINISHED INSTALLING SECRETFINDER------------------------"
