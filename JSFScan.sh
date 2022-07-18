@@ -93,7 +93,7 @@ bash report.sh
 #Save in Output Folder
 output(){
 mkdir -p $dir
-mv jsfile_links_tmp.txt endpoints.txt jsfile_links.txt jslinksecret.txt live_jsfile_links.txt jswordlist.txt js_var.txt domxss_scan.txt report.html $dir/ 2>/dev/null
+mv jsfile_links_tmp_cookie.txt jsfile_links_tmp.txt endpoints.txt jsfile_links.txt jslinksecret.txt live_jsfile_links.txt jswordlist.txt js_var.txt domxss_scan.txt report.html $dir/ 2>/dev/null
 mv jsfiles/ $dir/
 }
 while getopts ":l:f:cesmwvdro:-:" opt;do
