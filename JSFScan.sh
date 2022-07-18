@@ -32,6 +32,17 @@ echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Checking for live JsFiles-links\e[0m\n";
 cat jsfile_links.txt | httpx -follow-redirects -silent -status-code | grep "[200]" | cut -d ' ' -f1 | sort -u > live_jsfile_links.txt
 }
 
+#Gather JSFilesUrls
+gather_js_cookie(){
+echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started Gathering JsFiles-links Cookie Based\e[0m\n";
+cat $target | hakrawler -d 3 -t $SPIDER_THREADS -h "Cookie: $Cookie" | grep ".js" | sort -u >> jsfile_links_tmp_cookie.txt
+gospider -s $target -t $SPIDER_THREADS --cookie $Cookie -d 3 -q -R | grep ".js" | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | sort -u >> jsfile_links_tmp_cookie.txt
+
+#Check Live_URLS
+#echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Checking for live JsFiles-links\e[0m\n";
+cat jsfile_links_tmp_cookie.txt | httpx -follow-redirects -silent -status-code | grep "[200]" | cut -d ' ' -f1 | sort -u >> live_jsfile_links.txt
+}
+
 
 #Gather Endpoints From JsFiles
 endpoint_js(){
@@ -85,7 +96,7 @@ mkdir -p $dir
 mv jsfile_links_tmp.txt endpoints.txt jsfile_links.txt jslinksecret.txt live_jsfile_links.txt jswordlist.txt js_var.txt domxss_scan.txt report.html $dir/ 2>/dev/null
 mv jsfiles/ $dir/
 }
-while getopts ":l:f:esmwvdro:-:" opt;do
+while getopts ":l:f:cesmwvdro:-:" opt;do
 	case ${opt} in
 		- )      case "${OPTARG}" in
 
@@ -107,10 +118,12 @@ while getopts ":l:f:esmwvdro:-:" opt;do
 
 		l ) target=$OPTARG
 		    gather_js
-		    ;;
-                f ) target=$OPTARG
+		    ;;    
+        f ) target=$OPTARG
 		    open_jsurlfile
 		    ;;
+		c ) gather_js_cookie
+			;;    
 		e ) endpoint_js
 		    ;;
 		s ) secret_js
@@ -118,7 +131,7 @@ while getopts ":l:f:esmwvdro:-:" opt;do
 		m ) getjsbeautify
 		    ;;
 		w ) wordlist_js
-                    ;;
+            ;;
 		v ) var_js
 		    ;;
 		d ) domxss_js
