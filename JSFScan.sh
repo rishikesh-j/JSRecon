@@ -32,14 +32,11 @@ echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Checking for live JsFiles-links\e[0m\n";
 cat jsfile_links.txt | httpx -follow-redirects -silent -status-code | grep "[200]" | cut -d ' ' -f1 | sort -u > live_jsfile_links.txt
 }
 
-#Gather JSFilesUrls
+#Gather JSFilesUrls with Cookie
 gather_js_cookie(){
 echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started Gathering JsFiles-links Cookie Based\e[0m\n";
 cat $target | hakrawler -d 3 -t $SPIDER_THREADS -h "Cookie: $Cookie" | grep ".js" | sort -u >> jsfile_links_tmp_cookie.txt
 gospider -s $target -t $SPIDER_THREADS --cookie $Cookie -d 3 -q -R | grep ".js" | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | sort -u >> jsfile_links_tmp_cookie.txt
-
-#Check Live_URLS
-#echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Checking for live JsFiles-links\e[0m\n";
 cat jsfile_links_tmp_cookie.txt | httpx -follow-redirects -silent -status-code | grep "[200]" | cut -d ' ' -f1 | sort -u >> live_jsfile_links.txt
 }
 
