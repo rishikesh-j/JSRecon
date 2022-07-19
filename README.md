@@ -6,7 +6,8 @@ Script made for all your javascript recon automation in bugbounty. Just pass sub
 
 # Features
 ```
-1 - Gather Jsfile Links from different sources.
+0 - Gather Jsfile Links from different sources.
+1 - Gather JS Files With Cookie also
 2 - Import File Containing JSUrls
 3 - Extract Endpoints from Jsfiles
 4 - Find Secrets from Jsfiles
