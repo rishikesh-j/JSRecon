@@ -106,6 +106,7 @@ https://github.com
                                                               
 Usage: 
        -l   Gather Js Files Links
+       -c   Gather Js Links with Cookies
        -f   Import File Containing JS Urls
        -e   Gather Endpoints For JSFiles
        -s   Find Secrets For JSFiles
