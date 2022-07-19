@@ -1,8 +1,6 @@
 # JSRecon
 
-Blog can be found at https://medium.com/@patelkathan22/beginners-guide-on-how-you-can-use-javascript-in-bugbounty-492f6eb1f9ea?sk=21500dc4288281c7e6ed2315943269e7
-
-Script made for all your javascript recon automation in bugbounty. Just pass subdomain list to it and options according to your preference.
+Script made for all your Javascript Recon Automation. Just pass subdomain list to it and options according to your preference.
 
 # Features
 ```
