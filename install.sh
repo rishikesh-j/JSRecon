@@ -34,7 +34,7 @@ echo -e "\n-----------------------FINISHED INSTALLING GAU-----------------------
 
 #INSTALL SUBJS
 echo -e "\n-----------------------INSTALLING SUBJS------------------------"
-go install -v github.com/lc/subjs@latest
+go get -u github.com/lc/subjs > /dev/null 2>&1 && ln -s ~/go/bin/subjs /usr/local/bin/;
 echo -e "\n-----------------------FINISHED INSTALLING SUBJS------------------------"
 
 #INSTALL HAKCHECKURL
