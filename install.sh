@@ -39,7 +39,7 @@ echo -e "\n-----------------------FINISHED INSTALLING SUBJS---------------------
 
 #INSTALL HAKCHECKURL
 echo -e "\n-----------------------INSTALLING HTTPX------------------------"
-go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+GO111MODULE=on go get -v github.com/projectdiscovery/httpx/cmd/httpx > /dev/null 2>&1 && ln -s ~/go/bin/httpx /usr/local/bin/;
 echo -e "\n-----------------------FINISHED INSTALLING HTTPX------------------------"
 
 #INSTALL GETJSBEAUTIFY.SH
