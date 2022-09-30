@@ -28,8 +28,8 @@ echo -e "\n-----------------------FINISHED INSTALLING SECRETFINDER--------------
 
 #INSTALL GAU
 echo -e "\n-----------------------INSTALLING GAU------------------------"
+GO111MODULE=on go get -u -v github.com/lc/gau > /dev/null 2>&1 && ln -s ~/go/bin/gau /usr/local/bin/;
 go install -v github.com/tomnomnom/waybackurls@latest
-go install -v github.com/lc/gau@latest
 echo -e "\n-----------------------FINISHED INSTALLING GAU------------------------"
 
 #INSTALL SUBJS
