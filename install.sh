@@ -26,6 +26,11 @@ cd -
 pip3 install --user -r ./tools/SecretFinder/requirements.txt
 echo -e "\n-----------------------FINISHED INSTALLING SECRETFINDER------------------------"
 
+#INSTALL Sherlockeys
+echo -e "\n-----------------------INSTALLING SECRETFINDER------------------------"
+pip install sherlockeys
+echo -e "\n-----------------------FINISHED INSTALLING SECRETFINDER------------------------"
+
 #INSTALL GAU
 echo -e "\n-----------------------INSTALLING GAU------------------------"
 GO111MODULE=on go get -u -v github.com/lc/gau > /dev/null 2>&1 && ln -s ~/go/bin/gau /usr/local/bin/;
