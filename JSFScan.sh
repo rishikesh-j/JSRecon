@@ -53,6 +53,13 @@ echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started Finding Secrets in JSFiles\e[0m\n
 interlace -tL live_jsfile_links.txt -threads $INTERLACE_THREADS -c "python3 ./tools/SecretFinder/SecretFinder.py -i _target_ -o cli >> jslinksecret.txt" -v
 }
 
+#Verify Secrets From Js Files
+verify_secret_js(){
+echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started Verfiying Secrets in JSFiles\e[0m\n";
+cat jslinksecret.txt | grep '>' | awk '{print $3}' > secret.txt 
+for i in `cat secret.txt` ; do sherlockeys $i ; done | grep 'http' > valid_secret.txt
+}
+
 #Collect Js Files For Maually Search
 getjsbeautify(){
 echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started to Gather JSFiles locally for Manual Testing\e[0m\n";
@@ -90,7 +97,7 @@ bash report.sh
 #Save in Output Folder
 output(){
 mkdir -p $dir
-mv jsfile_links_tmp_cookie.txt jsfile_links_tmp.txt endpoints.txt jsfile_links.txt jslinksecret.txt live_jsfile_links.txt jswordlist.txt js_var.txt domxss_scan.txt report.html $dir/ 2>/dev/null
+mv jsfile_links_tmp_cookie.txt jsfile_links_tmp.txt secret.txt valid_secret.txt endpoints.txt jsfile_links.txt jslinksecret.txt live_jsfile_links.txt jswordlist.txt js_var.txt domxss_scan.txt report.html $dir/ 2>/dev/null
 mv jsfiles/ $dir/
 }
 while getopts ":l:f:cesmwvdro:-:" opt;do
@@ -104,6 +111,7 @@ while getopts ":l:f:cesmwvdro:-:" opt;do
 				wordlist_js
 				var_js
 				domxss_js
+				verify_secret_js
 				;;
 
 			*)
@@ -125,6 +133,8 @@ while getopts ":l:f:cesmwvdro:-:" opt;do
 		    ;;
 		s ) secret_js
 		    ;;
+		p ) verify_secret_js
+		    ;;
 		m ) getjsbeautify
 		    ;;
 		w ) wordlist_js
@@ -141,8 +151,9 @@ while getopts ":l:f:cesmwvdro:-:" opt;do
 		\? | h ) echo "Usage: "
 		     echo "       -l   Gather Js Files Links";
 		     echo "       -f   Import File Containing JS Urls";
-                     echo "       -e   Gather Endpoints For JSFiles";
+             	     echo "       -e   Gather Endpoints For JSFiles";
 		     echo "       -s   Find Secrets For JSFiles";
+		     echo "       -p   Verfiy Secrets For JSFiles";
 		     echo "       -m   Fetch Js Files for manual testing";
 		     echo "       -o   Make an Output Directory to put all things Together";
 		     echo "       -w   Make a wordlist using words from jsfiles";
