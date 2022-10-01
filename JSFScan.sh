@@ -57,7 +57,7 @@ interlace -tL live_jsfile_links.txt -threads $INTERLACE_THREADS -c "python3 ./to
 verify_secret_js(){
 echo -e "\n\e[36m[\e[32m+\e[36m]\e[92m Started Verfiying Secrets in JSFiles\e[0m\n";
 cat jslinksecret.txt | grep '>' | awk '{print $3}' > secret.txt 
-for i in `cat secret.txt` ; do sherlockeys $i ; done | grep 'http' > valid_secret.txt
+for i in `cat secret.txt` ; do sherlockeys $i ; done | grep -i 'http' > valid_secret.txt
 }
 
 #Collect Js Files For Maually Search
@@ -151,7 +151,7 @@ while getopts ":l:f:cesmwvdro:-:" opt;do
 		\? | h ) echo "Usage: "
 		     echo "       -l   Gather Js Files Links";
 		     echo "       -f   Import File Containing JS Urls";
-             	     echo "       -e   Gather Endpoints For JSFiles";
+             echo "       -e   Gather Endpoints For JSFiles";
 		     echo "       -s   Find Secrets For JSFiles";
 		     echo "       -p   Verfiy Secrets For JSFiles";
 		     echo "       -m   Fetch Js Files for manual testing";
